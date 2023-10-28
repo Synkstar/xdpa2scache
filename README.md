@@ -7,7 +7,7 @@ Tested on kernel version 6.1.0-12 ( Debian 11 ). Keep in mind older kernel versi
 ```
 git clone https://github.com/Synkstar/xdpa2scache.git --recursive
 
-sudo apt install build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake
+sudo apt install build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake bpftool
 
 cd xdpa2scache
 
