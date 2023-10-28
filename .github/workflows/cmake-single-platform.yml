@@ -10,8 +10,10 @@ jobs:
       image: debian:bullseye-slim # Using Debian Bullseye as an example
 
     steps:
-    - name: Checkout code
+    - name: Checkout code with submodules
       uses: actions/checkout@v2
+      with:
+        submodules: recursive # ensures submodules are cloned recursively
 
     - name: Install required packages
       run: |
