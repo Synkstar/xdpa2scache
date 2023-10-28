@@ -22,7 +22,7 @@ jobs:
 
     - name: Install required packages
       run: |
-        apt install -y sudo build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake
+        apt install -y sudo build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake bpftool
 
     - name: Run make
       run: make
