@@ -7,9 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: debian:bullseye-slim # Using Debian Bullseye as an example
+      image: debian:bullseye-slim 
 
     steps:
+    - name: Setup Git
+      run: |
+        apt update
+        apt install -y git
+
     - name: Checkout code with submodules
       uses: actions/checkout@v2
       with:
@@ -17,7 +22,6 @@ jobs:
 
     - name: Install required packages
       run: |
-        apt update
         apt install -y sudo build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake
 
     - name: Run make
