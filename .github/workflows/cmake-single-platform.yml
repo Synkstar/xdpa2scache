@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: debian:bullseye-slim 
+      image: debian:bullseye-slim
 
     steps:
     - name: Setup Git
@@ -18,13 +18,27 @@ jobs:
     - name: Checkout code with submodules
       uses: actions/checkout@v2
       with:
-        submodules: recursive # ensures submodules are cloned recursively
+        submodules: recursive
+
+    - name: Cache apt packages
+      uses: actions/cache@v2
+      with:
+        path: /var/cache/apt/archives/
+        key: apt-packages-${{ runner.os }}
 
     - name: Install required packages
       run: |
         apt install -y sudo build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake
-    
-    - name: Build and Install bpftool from source
+
+    - name: Cache bpftool
+      id: cache-bpftool
+      uses: actions/cache@v2
+      with:
+        path: ~/bpftool-cache
+        key: bpftool-${{ runner.os }}
+
+    - name: Build and Install bpftool from source (if not cached)
+      if: steps.cache-bpftool.outputs.cache-hit != 'true'
       run: |
         git clone --filter=blob:none --no-checkout https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux-source
         cd linux-source
@@ -32,8 +46,13 @@ jobs:
         git sparse-checkout set tools/bpf/bpftool
         git checkout
         cd tools/bpf/bpftool/
-        make && make install
+        make
+        mkdir -p ~/bpftool-cache
+        cp bpftool ~/bpftool-cache/
 
+    - name: Install bpftool
+      run: |
+        cp ~/bpftool-cache/bpftool /usr/local/bin/
 
     - name: Run make
       run: make
