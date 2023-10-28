@@ -22,7 +22,15 @@ jobs:
 
     - name: Install required packages
       run: |
-        apt install -y sudo build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake bpftool
+        apt install -y sudo build-essential make clang llvm m4 libpcap-dev libelf-dev gcc-multilib cmake
+    
+    - name: Build and Install libbpf and bpftool from source
+      run: |
+        git clone https://github.com/libbpf/libbpf.git
+        cd libbpf/src
+        make && make install
+        cd ../tools/bpftool
+        make && make install
 
     - name: Run make
       run: make
