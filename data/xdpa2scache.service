@@ -1,0 +1,11 @@
+[Unit]
+Description=XDP A2S Cache
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+ExecStart=/usr/bin/xdpa2scache
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

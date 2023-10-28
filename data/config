@@ -1,0 +1,6 @@
+interface = "eth0";
+offload = false; // Attempt to load onto the NIC. Hardware offloading only supported on a select few NICs. Program may be too complex to offload.
+skb = false; // Force SKB mode. It is slower, so don't enable this unless you have to.
+servers = (
+        { ip = "192.168.0.0"; port = 27015; }
+)
