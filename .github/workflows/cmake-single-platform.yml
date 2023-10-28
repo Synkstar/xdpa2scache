@@ -26,10 +26,8 @@ jobs:
     
     - name: Build and Install libbpf and bpftool from source
       run: |
-        git clone https://github.com/libbpf/libbpf.git
-        cd libbpf/src
-        make && make install
-        cd ../tools/bpftool
+        git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+        cd linux/tools/bpf/bpftool/
         make && make install
 
     - name: Run make
