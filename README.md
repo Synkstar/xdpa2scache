@@ -1,6 +1,6 @@
 # XDP A2S Cache
 
-Currently only supports A2S_INFO and A2S_PLAYERS. Purely done in XDP at the moment AF_XDP will have to be added to support a2s_rules and large a2s_players because of fragmentation.
+Currently only supports A2S_INFO and A2S_PLAYERS. Purely done in XDP at the moment AF_XDP will have to be added to support A2S_RULES and large A2S_PLAYERS because of fragmentation.
 Tested on kernel version 6.1.0-12 ( Debian 11 ). Keep in mind older kernel versions can be lacking in capabilities for XDP.
 
 ## Installation:
