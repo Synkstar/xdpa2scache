@@ -12,9 +12,6 @@ MAPSSRC = maps.c
 XDPPROGSRC = xdp.c
 XDPPROGBC = xdp.bc
 XDPPROGOBJ = xdp.o
-TCSRC = tc.c
-TCBC = tc.bc
-TCOBJ = tc.o
 
 LDFLAGS += -lelf -lz -lconfig -lxdp -lbpf 
 
@@ -43,7 +40,6 @@ build_xdptools:
 install:
 	mkdir -p /etc/xdpa2scache
 	cp $(BUILDDIR)/$(XDPPROGOBJ) /etc/xdpa2scache/$(XDPPROGOBJ)
-	cp $(BUILDDIR)/$(TCOBJ) /etc/xdpa2scache/$(TCOBJ)
 	cp $(BUILDDIR)/$(LOADEROUT) /usr/bin/$(LOADEROUT)
 	cp data/xdpa2scache.service /etc/systemd/system/
 	$(MAKE) install -C modules/xdp-tools/

@@ -89,7 +89,7 @@ static __always_inline void swap_udp(struct udphdr *udph)
 }
 
 // May replace this in the future
-static __always_inline uint32_t jenkins_one_at_a_time_hash(char *key, size_t len)
+static __always_inline uint32_t jenkins_hash(char *key, size_t len)
 {
     uint32_t hash = 0;
     size_t i;
@@ -124,7 +124,7 @@ static __always_inline __u32 cookie_hash(__u32 saddr, __u32 daddr, __u16 sport, 
         memcpy(hash_input, &data, sizeof(struct four_tuple));
         // Incorporate our key
         memcpy(hash_input + sizeof(struct four_tuple), key, 8);
-        cookie = jenkins_one_at_a_time_hash(hash_input, 20);
+        cookie = jenkins_hash(hash_input, 20);
     }
 
     return cookie;
